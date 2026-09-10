@@ -9,8 +9,8 @@
     "check-types": "turbo run check-types",
     "db:generate": "cd packages/db && DATABASE_URL=\"postgresql://neondb_owner:npg_BdzPof60yMlK@ep-plain-frog-ayvxkhtp-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require\" npx prisma generate && cd ../..",
     "start:web": "cd apps/web && bun run start",
-    "start:backend": "cd apps/backend && bun run start",
-    "start:websocket": "cd apps/ws && bun run start"
+    "start:backend": "cd apps/backend && bun run index.ts",
+    "start:websocket": "cd apps/ws && bun run index.ts"
   },
   "devDependencies": {
     "prettier": "3.9.6",
