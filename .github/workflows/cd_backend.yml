@@ -28,4 +28,4 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       ## step to deploy to virtual machine
-        
+      ## - name: Deploy to VM
