@@ -41,3 +41,5 @@ jobs:
             docker rm user_backend || true &&
             docker run --name user_backend -d --restart unless-stopped -p 8080:8080 -e DATABASE_URL='${DATABASE_URL}' rajharsh8706/todo-app-backend:${IMAGE_TAG}
           "
+
+#laooooo
