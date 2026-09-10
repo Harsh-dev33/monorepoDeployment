@@ -27,5 +27,17 @@ jobs:
           build-args: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      ## step to deploy to virtual machine
-      ## - name: Deploy to VM
+      - name: Deploy to the VM
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@65.2.78.148 "
+            docker pull rajharsh8706/todo-app-backend:${IMAGE_TAG} &&
+            docker stop user_backend || true &&
+            docker rm user_backend || true &&
+            docker run --name user_backend -d --restart unless-stopped -p 8080:8080 -e DATABASE_URL='${DATABASE_URL}' rajharsh8706/todo-app-backend:${IMAGE_TAG}
+          "
